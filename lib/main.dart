@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/screens/categories.dart';
 import 'package:todo_app/screens/home.dart';
 
 void main() {
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(context) {
     return const MaterialApp(
       title: 'Todo',
-      home: CategoriesScreen(),
+      home: HomeScreen(),
     );
   }
 }
