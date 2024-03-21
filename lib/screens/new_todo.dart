@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-import 'package:flutter/widgets.dart';
-
 class NewTodo extends StatefulWidget {
   const NewTodo({super.key});
   @override
@@ -21,13 +19,13 @@ class _NewTodoState extends State<NewTodo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text('New Todo'),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(20.0),
           child: Form(
             key: _formKey,
             child: Column(
@@ -38,33 +36,35 @@ class _NewTodoState extends State<NewTodo> {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                   ),
-                  textAlign: TextAlign.start,
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.grey[100]),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 13),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(color: Colors.grey[100]),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey.shade100),
+                      ),
+                      fillColor: Colors.grey.shade200,
+                      hintText: 'Enter title here',
+                      hintStyle: const TextStyle(fontWeight: FontWeight.normal),
+                      filled: true,
+                      //labelText: 'Title',
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey.shade100),
-                    ),
-                    fillColor: Colors.grey.shade200,
-                    hintText: 'Enter title here',
-                    hintStyle: const TextStyle(fontWeight: FontWeight.normal),
-                    filled: true,
-                    //labelText: 'Title',
+                    enableSuggestions: false,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a title';
+                      }
+                      return null;
+                    },
+                    onSaved: (newValue) {
+                      title = newValue!;
+                    },
                   ),
-                  enableSuggestions: false,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a title';
-                    }
-                    return null;
-                  },
-                  onSaved: (newValue) {
-                    title = newValue!;
-                  },
                 ),
                 const SizedBox(
                   height: 20,
@@ -76,107 +76,78 @@ class _NewTodoState extends State<NewTodo> {
                   ),
                   textAlign: TextAlign.start,
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.grey[100]),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 13),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(color: Colors.grey[100]),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey.shade100),
+                      ),
+                      fillColor: Colors.grey.shade200,
+                      hintText: 'Enter Description here',
+                      hintStyle: const TextStyle(fontWeight: FontWeight.normal),
+                      filled: true,
+                      //labelText: 'Title',
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey.shade100),
-                    ),
-                    fillColor: Colors.grey.shade200,
-                    hintText: 'Enter Description here',
-                    hintStyle: const TextStyle(fontWeight: FontWeight.normal),
-                    filled: true,
-                    //labelText: 'Title',
+                    enableSuggestions: false,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a description';
+                      }
+                      return null;
+                    },
+                    onSaved: (newValue) {
+                      description = newValue!;
+                    },
                   ),
-                  enableSuggestions: false,
-                  //maxLines: 3,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a description';
-                    }
-                    return null;
-                  },
-                  onSaved: (newValue) {
-                    description = newValue!;
-                  },
+                ),
+                const SizedBox(
+                  height: 35,
                 ),
                 Row(
                   children: [
+                    const SizedBox(
+                      width: 14,
+                    ),
                     TextButton.icon(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromARGB(224, 39, 4, 196)),
                       ),
                       onPressed: () => _selectDate(context),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.calendar_month,
                         color: Colors.white,
                       ),
                       label: Text(
                         '${selectedDate.toIso8601String().split('T')[0]}',
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                     const SizedBox(
-                      width: 50,
+                      width: 40,
                     ),
-                    const Text('Select Date:'),
+                    const Text(
+                      'Select Date',
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
+                    ),
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
-                /* Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Radio(
-                          value: true,
-                          groupValue: isComplete,
-                          onChanged: (value) {
-                            setState(() {
-                              isComplete = value as bool;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Text('Complete'),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Radio(
-                          value: true,
-                          groupValue: isComplete,
-                          onChanged: (value) {
-                            setState(() {
-                              isComplete = value as bool;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Text('Incomplete'),
-                      ],
-                    ),
-                  ],
-                ),
-                */
-
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
                         Radio(
-                          value: true,
+                          value: false,
                           groupValue: isComplete,
                           onChanged: (value) {
                             setState(() {
@@ -190,12 +161,11 @@ class _NewTodoState extends State<NewTodo> {
                         const Text('Incomplete'),
                       ],
                     ),
-                    //const Text('Complete'),
                     const SizedBox(width: 10),
                     Row(
                       children: [
                         Radio(
-                          value: false,
+                          value: true,
                           groupValue: isComplete,
                           onChanged: (value) {
                             setState(() {
