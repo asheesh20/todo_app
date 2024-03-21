@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/models/category.dart';
+import 'package:todo_app/screens/new_todo.dart';
 
 class CategoryGrid extends StatelessWidget {
   const CategoryGrid({super.key, required this.title, required this.icon});
@@ -13,7 +14,7 @@ class CategoryGrid extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Color.fromARGB(224, 39, 4, 196),
+        color: const Color.fromARGB(224, 39, 4, 196),
       ),
       width: 140,
       height: 140,
@@ -23,12 +24,12 @@ class CategoryGrid extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
-            SizedBox(
+            const SizedBox(
               height: 11,
             ),
             icon,
